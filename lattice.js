@@ -83,10 +83,10 @@ _____________
 		yBase: 325,
 		width: 15,
 		height: 3,
-		tiles: '
+		tiles: `
 ***  *  *** ***
 * * *** **   * 
-*** * * * * ** '
+*** * * * * ** `.split("\n").slice(1)
 	}
 
 	majora_mask: {
