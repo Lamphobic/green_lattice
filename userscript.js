@@ -4,6 +4,7 @@
 // @version      0.1
 // @author       Expyron
 // @include      https://www.reddit.com/place*
+// @require       http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
 // @grant        none
 // ==/UserScript==
 
