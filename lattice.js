@@ -99,7 +99,7 @@ _____________
 					} else {
 						return "_";
 					}
-					
+
 				}
 			}
 			return _this.getBackgroundLatticeColor(x,y)
@@ -142,7 +142,7 @@ _____________
 					var tileColor = tile[3];
 					_this.api.getPixelInfo(x,y).then(function(bTile){
 						if (bTile.color == tileColor) {
-							console.log("Drawing at (" + x + "," + y + "): " + targetColor);
+							console.log("Drawing at (" + x + "," + y + "): " + get_color_name(targetColor));
 							_this.api.draw(x,y,targetColor);
 							window.setInterval(function(){_this.drawOne()}, 5000);
 						} else {
@@ -210,7 +210,7 @@ _____________
 				}
 
 				_this.drawBorder(_this.xBase,_this.yBase,_this.width,_this.height,"purple");
-	            
+
 	            for (var i = 0;i < _this.wrongTiles.length; i++) {
 	            	var tile = _this.wrongTiles[i];
 
@@ -230,6 +230,43 @@ _____________
 		_this.getWrongTiles();
 	}
 
+}
+
+function get_color_name(color_number) {
+	switch(color_number) {
+		case 0:
+			return 'white';
+		case 1:
+			return 'lightGrey';
+		case 2:
+			return 'grey';
+		case 3:
+			return 'black';
+		case 4:
+			return 'pink';
+		case 5:
+			return 'red';
+		case 6:
+			return 'orange';
+		case 7:
+			return 'brown';
+		case 8:
+			return 'yellow';
+		case 9:
+			return 'lightGreen';
+		case 10:
+			return 'green';
+		case 11:
+			return 'cyan';
+		case 12:
+			return 'teal';
+		case 13:
+			return 'blue';
+		case 14:
+			return 'fuchsia';
+		case 15:
+			return 'purple';
+	}
 }
 
 placeGreen.init();
