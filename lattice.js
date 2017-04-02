@@ -131,7 +131,7 @@ _*****____***************************************____*****_
 	bottom_left: {
 		xBase: 871,
 		yBase: 311,
-		width: 55,
+		width: 65,
 		height: 40,
 		tiles: Array(40).fill("_".repeat(55))
 	},
@@ -332,8 +332,9 @@ _*****____***************************************____*****_
 		var _this = this;
 		_this.art.push(_this.banner);
 		_this.art.push(_this.daft_punk_robot);
-		_this.art.push(_this.majora_mask);
 		_this.art.push(_this.bottom_left);
+		_this.art.push(_this.majora_mask);
+
 		_this.wrongTiles = [];
 
 		// set up info widgets
