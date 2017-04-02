@@ -215,6 +215,9 @@ _*****____***************************************____*****_
 
 	drawOne: function () {
 		var _this = this;
+
+		_this.getWrongTiles();
+
 		this.api.getTimeToWait().then(function(timer) {
 			if (timer < 1) {
 				if (_this.wrongTiles.length > 0) {
