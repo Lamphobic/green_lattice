@@ -1,4 +1,8 @@
 var placeGreen = {
+
+	// semver convention
+	version: "v1.0.0",
+
 	//Options
 	xBase: 900,
 	yBase: 240,
@@ -246,7 +250,7 @@ _____    _______________________________________    _____
 		node.classList.add("place-activity-count");
 		node.id = 'last-color-pixel';
 
-		node.style.transform = "translate(-10px,-75px)";
+		node.style.transform = "translate(-10px,-100px)";
 
 		var x = 42;
 		var y = 42;
@@ -264,20 +268,6 @@ _____    _______________________________________    _____
 
 	},
 
-	setWrongTileCount: function() {
-		var toolbar = document.getElementsByClassName('place-bottom-toolbar')[0];
-		var node = document.createElement("div");
-		this.wrongTilesNode = node;
-
-		node.classList.add("place-activity-count");
-
-		node.style.transform = "translate(-10px,-50px)";
-
-		node.innerHTML = "0";
-
-		toolbar.appendChild(node);
-	},
-
 	setupBorderToggle: function() {
 		_this = this;
 		var toolbar = document.getElementsByClassName('place-bottom-toolbar')[0];
@@ -285,7 +275,7 @@ _____    _______________________________________    _____
 
 		node.classList.add("place-activity-count");
 
-		node.style.transform = "translate(-10px,-100px)";
+		node.style.transform = "translate(-10px,-125px)";
 
 		node.innerHTML = "<label><input type='checkbox' name='setting_border_toggle' /> Show border</label>";
 
@@ -309,7 +299,7 @@ _____    _______________________________________    _____
 
 		node.classList.add("place-activity-count");
 
-		node.style.transform = "translate(-10px,-125px)";
+		node.style.transform = "translate(-10px,-150px)";
 
 		node.innerHTML = "<label><input type='checkbox' name='setting_bad_tile_toggle' /> Show Bad Tiles</label>";
 
@@ -326,6 +316,34 @@ _____    _______________________________________    _____
         $("input[name='setting_bad_tile_toggle']").prop("checked", default_state);
 	},
 
+	setWrongTileCount: function() {
+		var toolbar = document.getElementsByClassName('place-bottom-toolbar')[0];
+		var node = document.createElement("div");
+
+		node.classList.add("place-activity-count");
+
+		node.style.transform = "translate(-10px,-75px)";
+
+		node.innerHTML = "0";
+
+		toolbar.appendChild(node);
+	},
+
+	setupVersionBadge: function() {
+		_this = this;
+		var toolbar = document.getElementsByClassName('place-bottom-toolbar')[0];
+		var node = document.createElement("div");
+
+		node.classList.add("place-activity-count");
+
+		node.style.transform = "translate(-10px,-50px)";
+
+		node.innerHTML = 'Version: ' + _this.version;
+
+		toolbar.appendChild(node);
+
+	},
+
 	init: function() {
 		var _this = this;
 		_this.art.push(_this.banner);
@@ -336,10 +354,11 @@ _____    _______________________________________    _____
 
 		// set up info widgets
 
-		_this.setWrongTileCount();
-		_this.setupLastColorPixel();
-		_this.setupBorderToggle();
 		_this.setupBadTileToggle();
+		_this.setupBorderToggle();
+		_this.setupLastColorPixel();
+		_this.setWrongTileCount();
+		_this.setupVersionBadge();
 
 		r.placeModule("test", function(e) {
 			_this.api = e("api");
