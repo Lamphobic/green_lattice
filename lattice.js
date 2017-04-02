@@ -213,14 +213,66 @@ _____________
 		toolbar.appendChild(node);
 	},
 
+	setupBorderToggle: function() {
+		var toolbar = document.getElementsByClassName('place-bottom-toolbar')[0];
+		var node = document.createElement("div");
+
+		node.classList.add("place-activity-count");
+
+		node.style.transform = "translate(-10px,-100px)";
+
+		node.innerHTML = "<label><input type='checkbox' name='setting_border_toggle' /> Show border</label>";
+
+		toolbar.appendChild(node);
+
+		var default_state = true;
+		window.setting_border_toggle = default_state;
+
+        $("input[name='setting_border_toggle']").change(function() {
+        	console.log('toggle');
+            window.setting_border_toggle = !window.setting_border_toggle;
+        });
+
+        $("input[name='setting_border_toggle']").prop("checked", default_state);
+	},
+
+	setupBadTileToggle: function() {
+		var toolbar = document.getElementsByClassName('place-bottom-toolbar')[0];
+		var node = document.createElement("div");
+
+		node.classList.add("place-activity-count");
+
+		node.style.transform = "translate(-10px,-125px)";
+
+		node.innerHTML = "<label><input type='checkbox' name='setting_bad_tile_toggle' /> Show Bad Tiles</label>";
+
+		toolbar.appendChild(node);
+
+		var default_state = true;
+		window.setting_bad_tile_toggle = default_state;
+
+        $("input[name='setting_bad_tile_toggle']").change(function() {
+        	console.log('toggle');
+            window.setting_bad_tile_toggle = !window.setting_bad_tile_toggle;
+        });
+
+        $("input[name='setting_bad_tile_toggle']").prop("checked", default_state);
+	},
+
 	init: function() {
 		var _this = this;
 		_this.art.push(_this.banner);
 		_this.art.push(_this.daft_punk_robot);
 		_this.art.push(_this.majora_mask);
 		_this.wrongTiles = [];
+
+		// set up info widgets
+
 		_this.setWrongTileCount();
 		_this.setupLastColorPixel();
+		_this.setupBorderToggle();
+		_this.setupBadTileToggle();
+
 		r.placeModule("test", function(e) {
 			_this.api = e("api");
 			_this.canvasse = e("canvasse");
@@ -231,21 +283,33 @@ _____________
 	            var e = new ImageData(_this.canvasse.readBuffer, _this.canvasse.width, _this.canvasse.height);
 	            _this.canvasse.ctx.putImageData(e, 0, 0);
 
-	            for (artPiece in _this.art) {
-					var piece = _this.art[artPiece];
-					_this.drawBorder(piece.xBase,piece.yBase,piece.width,piece.height,"blue");
+	            if(!!window.setting_border_toggle) {
+
+		            for (artPiece in _this.art) {
+						var piece = _this.art[artPiece];
+						_this.drawBorder(piece.xBase,piece.yBase,piece.width,piece.height,"blue");
+					}
+
+					_this.drawBorder(_this.xBase,_this.yBase,_this.width,_this.height,"purple");
 				}
 
-				_this.drawBorder(_this.xBase,_this.yBase,_this.width,_this.height,"purple");
+				if(!!window.setting_bad_tile_toggle) {
 
-	            for (var i = 0;i < _this.wrongTiles.length; i++) {
-	            	var tile = _this.wrongTiles[i];
+		            for (var i = 0;i < _this.wrongTiles.length; i++) {
+		            	var tile = _this.wrongTiles[i];
 
-					//this.canvasse.ctx.fillStyle = this.client.getPaletteColor(tile[3]);
-					_this.canvasse.ctx.fillStyle = 'red';
+						// var my_gradient = _this.canvasse.ctx.createLinearGradient(0, 0, 170, 0);
+						// my_gradient.addColorStop(0, "red");
+						// my_gradient.addColorStop(1, "white");
+						// _this.canvasse.ctx.fillStyle = my_gradient;
 
-					_this.canvasse.ctx.fillRect(tile[0], tile[1], 1, 1);
-	            }
+						//this.canvasse.ctx.fillStyle = this.client.getPaletteColor(tile[3]);
+						_this.canvasse.ctx.fillStyle = 'red';
+
+						_this.canvasse.ctx.fillRect(tile[0], tile[1], 1, 1);
+		            }
+
+	        	}
 
 
 	            _this.canvasse.isBufferDirty = !1;
