@@ -192,7 +192,8 @@ _____    _______________________________________    _____
 					}
 				}
 			}
-			_this.wrongTilesNode.innerHTML = _this.wrongTiles.length + " wrong tiles in lattice"
+
+			document.getElementById("wrongTilesNode").innerHTML = _this.wrongTiles.length + " wrong tiles in lattice"
 			//console.log(_this.wrongTiles.length + " wrong tiles");
 
 			_this.client.setInitialState(canvas);
@@ -321,6 +322,7 @@ _____    _______________________________________    _____
 		var node = document.createElement("div");
 
 		node.classList.add("place-activity-count");
+		node.id = 'wrongTilesNode';
 
 		node.style.transform = "translate(-10px,-75px)";
 
