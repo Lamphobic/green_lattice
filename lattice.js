@@ -3,7 +3,7 @@ var placeGreen = {
 	xBase: 900,
 	yBase: 250,
 	width: 100,
-	height: 50,
+	height: 45,
 
 	art: [],
 
@@ -98,6 +98,7 @@ _____________
 					}
 				}
 			}
+			_this.wrongTilesNode.innerHTML = _this.wrongTiles.length + " wrong tiles in lattice"
 			console.log(_this.wrongTiles.length + " wrong tiles");
 		});
 	},
@@ -142,11 +143,26 @@ _____________
         }
 	},
 
+	setWrongTileCount: function() {
+		var toolbar = document.getElementsByClassName('place-bottom-toolbar')[0];
+		var node = document.createElement("div");
+		this.wrongTilesNode = node;
+
+		node.classList.add("place-activity-count");
+
+		node.style.transform = "translate(-10px,-50px)";
+
+		node.innerHTML = "0";
+
+		toolbar.appendChild(node);
+	},
+
 	init: function() {
 		var _this = this;
 		_this.art.push(_this.banner);
 		_this.art.push(_this.daft_punk_robot);
 		_this.wrongTiles = [];
+		_this.setWrongTileCount();
 		r.placeModule("test", function(e) {
 			_this.api = e("api");
 			_this.canvasse = e("canvasse");
