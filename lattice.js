@@ -1,16 +1,27 @@
-var placeGreen = {
+//Start defining functions.
+
+var placeGreen = { //a variable that holds functions. I >3 javascript. /s
 
 	// semver convention
 	version: "v1.5",
 
-	//Options
+	//Options (for what?)
 	xBase: 900,
 	yBase: 230,
 	width: 100,
 	height: 100,
 
-	art: [],
+	art: [], //art pieces will be placed here later.
 
+	//art starts here
+	/*
+	Special Characters:
+		_:Wildcard. Do not paint over this square.
+		*:Same as _.
+	Colors: (See bottom of page)	
+	
+	*/
+	
 	//Banner
 	banner: {
 		xBase: 909,
@@ -65,6 +76,17 @@ _____________
   _________  
    _______   
    _______   `.split("\n").slice(1)
+	},
+	
+	daft_logo: {
+		xBase: 983,
+		yBase: 325,
+		width: 15,
+		height: 3,
+		tiles: `
+***  *  *** ***
+* * *** **   * 
+*** * * * * ** `.split("\n").slice(1)
 	},
 
 	majora_mask: {
@@ -131,14 +153,15 @@ _*****____***************************************____*****_
                 _**_                    _**_               
                  __                      __                `.split("\n").slice(1)
 	},
-
-	bottom_left: {
+	//art ends here/
+	
+	bottom_left: { //the shields?
 		xBase: 871,
 		yBase: 311,
 		width: 65,
 		height: 40,
 		tiles: Array(40).fill("_".repeat(65))
-	},
+	}, //Probably art.
 
 	getBackgroundLatticeColor: function (x,y) {
 		if (x % 2 == 1 && y % 2 == 1) {
@@ -368,12 +391,13 @@ _*****____***************************************____*****_
 
 	},
 
-	init: function() {
+	init: function() { //This is the first function fam. It starts everything.
 		var _this = this;
 		_this.art.push(_this.banner);
 		_this.art.push(_this.daft_punk_robot);
 		_this.art.push(_this.bottom_left);
 		_this.art.push(_this.majora_mask);
+		_this.art.push(_this.daft_logo);
 
 		_this.wrongTiles = [];
 
@@ -385,13 +409,13 @@ _*****____***************************************____*****_
 		_this.setWrongTileCount();
 		_this.setupVersionBadge();
 
-		r.placeModule("test", function(e) {
+		r.placeModule("test", function(e) { //Not sure what this does yet. Probably most of everything.
 			_this.api = e("api");
 			_this.canvasse = e("canvasse");
 			_this.client = e("client");
 			_this.timer = e("timer");
 
-			_this.canvasse.drawBufferToDisplay =  function() {
+			_this.canvasse.drawBufferToDisplay =  function() { //Also not sure. Will clarify with self soon.
 	            var e = new ImageData(_this.canvasse.readBuffer, _this.canvasse.width, _this.canvasse.height);
 	            _this.canvasse.ctx.putImageData(e, 0, 0);
 
@@ -472,4 +496,6 @@ function get_color_name(color_number) {
 	}
 }
 
-placeGreen.init();
+//Everything is defined now. Hooray!
+
+placeGreen.init(); //Run one of those suckers. It's a great idea.
