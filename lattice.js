@@ -232,6 +232,10 @@ _*****____***************************************____*****_
 						} else {
 							//console.log("Redrawing");
 						}
+					})
+					.catch(function(e) {
+					  console.error(e);
+					  window.setTimeout(function(){_this.drawOne()}, 5000);
 					});
 				}
 			} else {
