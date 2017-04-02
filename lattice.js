@@ -20,6 +20,13 @@ var placeGreen = {
 0 0     0     0   0 0 0   0     0     0 0 0 0     0   0   0     0   0 0     0    
 0 300 303     00000 0 300 00000 00000 0 300 00000 0   0   0     0   0 00000 00000`.split("\n").slice(1)
 	},
+	daft_punk_robot: {
+		xBase: 986,
+		yBase: 289,
+		width: 11,
+		height: 17,
+		tiles: ""
+	},
 	getBackgroundLatticeColor: function (x,y) {
 		if (x % 2 == 1 && y % 2 == 1) {
 			if ((x+y) % 4 == 0) {
@@ -38,12 +45,17 @@ var placeGreen = {
 			for (artPiece in _this.art) {
 				var piece = _this.art[artPiece];
 				if (x >= piece.xBase && x < piece.xBase + piece.width && y >= piece.yBase && y < piece.yBase + piece.height ) {
-					var artColor = piece.tiles[y - piece.yBase][x - piece.xBase];
-					if (artColor === " ") {
-						return _this.getBackgroundLatticeColor(x,y);
+					if (piece.tiles[y - piece.yBase] && piece.tiles[y - piece.yBase][x - piece.xBase]) {
+						var artColor = piece.tiles[y - piece.yBase][x - piece.xBase];
+						if (artColor === " ") {
+							return _this.getBackgroundLatticeColor(x,y);
+						} else {
+							return artColor;
+						}
 					} else {
-						return artColor;
+						return "_";
 					}
+					
 				}
 			}
 			return _this.getBackgroundLatticeColor(x,y)
@@ -98,10 +110,25 @@ var placeGreen = {
 		})
 	},
 
+	drawBorder: function(xBase,yBase,width,height,color) {
+		_this = this;
+		_this.canvasse.ctx.fillStyle = color;
+
+        for (var x = xBase - 1;x < xBase + width + 1; x++) {
+        	_this.canvasse.ctx.fillRect(x, yBase - 1, 1, 1);
+        	_this.canvasse.ctx.fillRect(x, yBase + height, 1, 1);
+        }
+
+        for (var y = yBase - 1;y < yBase + height; y++) {
+        	_this.canvasse.ctx.fillRect(xBase - 1, y, 1, 1);
+        	_this.canvasse.ctx.fillRect(xBase + width, y, 1, 1);
+        }
+	},
 
 	init: function() {
 		var _this = this;
 		_this.art.push(_this.banner);
+		_this.art.push(_this.daft_punk_robot);
 		_this.wrongTiles = [];
 		r.placeModule("test", function(e) {
 			_this.api = e("api");
@@ -112,17 +139,13 @@ var placeGreen = {
 	            var e = new ImageData(_this.canvasse.readBuffer, _this.canvasse.width, _this.canvasse.height);
 	            _this.canvasse.ctx.putImageData(e, 0, 0);
 
-	            _this.canvasse.ctx.fillStyle = 'purple';
+	            _this.drawBorder(_this.xBase,_this.yBase,_this.width,_this.height,"purple");
 
-	            for (var x = _this.xBase;x < _this.xBase + _this.width; x++) {
-	            	_this.canvasse.ctx.fillRect(x, _this.yBase, 1, 1);
-	            	_this.canvasse.ctx.fillRect(x, _this.yBase + _this.height, 1, 1);
-	            }
-
-	            for (var y = _this.yBase;y < _this.yBase + _this.height; y++) {
-	            	_this.canvasse.ctx.fillRect(_this.xBase, y, 1, 1);
-	            	_this.canvasse.ctx.fillRect(_this.xBase + _this.width, y, 1, 1);
-	            }
+	            for (artPiece in _this.art) {
+					var piece = _this.art[artPiece];
+					_this.drawBorder(piece.xBase,piece.yBase,piece.width,piece.height,"purple");
+				}
+	            
 
 	            for (var i = 0;i < _this.wrongTiles.length; i++) {
 	            	var tile = _this.wrongTiles[i];
