@@ -144,6 +144,7 @@ _____________
 						if (bTile.color == tileColor) {
 							console.log("Drawing at (" + x + "," + y + "): " + targetColor);
 							_this.api.draw(x,y,targetColor);
+							window.setInterval(function(){_this.drawOne()}, 5000);
 						} else {
 							console.log("Redrawing");
 						}
@@ -151,7 +152,7 @@ _____________
 				}
 			} else {
 				window.setInterval(function(){_this.drawOne()}, timer + 5000);
-				console.log("Waiting: " + Math.floor(timer / 1000));
+				_this.timer.startTimer(timer + Date.now());
 			}
 		})
 	},
@@ -196,6 +197,7 @@ _____________
 			_this.api = e("api");
 			_this.canvasse = e("canvasse");
 			_this.client = e("client");
+			_this.timer = e("timer");
 
 			_this.canvasse.drawBufferToDisplay =  function() {
 	            var e = new ImageData(_this.canvasse.readBuffer, _this.canvasse.width, _this.canvasse.height);
