@@ -1,7 +1,7 @@
 var placeGreen = {
 
 	// semver convention
-	version: "v1.1.0",
+	version: "v1.2.0",
 
 	//Options
 	xBase: 900,
@@ -232,6 +232,10 @@ _*****____***************************************____*****_
 						} else {
 							//console.log("Redrawing");
 						}
+					})
+					.catch(function(e) {
+					  console.error(e);
+					  window.setTimeout(function(){_this.drawOne()}, 5000);
 					});
 				}
 			} else {
@@ -420,7 +424,7 @@ _*****____***************************************____*****_
 		});
 
 		window.setTimeout(function(){_this.drawOne()}, 3 * 1000);
-		window.setInterval(function(){_this.getWrongTiles()}, 4 * 1000);
+		window.setInterval(function(){_this.getWrongTiles()}, 30 * 1000);
 		_this.getWrongTiles();
 	}
 
