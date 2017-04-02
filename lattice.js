@@ -1,16 +1,19 @@
-var placeGreen = {
+//Start defining functions.
+
+var placeGreen = { //a variable that holds functions. I >3 javascript. /s
 
 	// semver convention
 	version: "v1.4.0",
 
-	//Options
+	//Options (for what?)
 	xBase: 900,
 	yBase: 230,
 	width: 100,
 	height: 100,
 
-	art: [],
+	art: [], //art pieces will be placed here later.
 
+	//art starts here
 	//Banner
 	banner: {
 		xBase: 909,
@@ -131,7 +134,8 @@ _*****____***************************************____*****_
                 _**_                    _**_               
                  __                      __                `.split("\n").slice(1)
 	},
-
+	//art ends here
+	
 	bottom_left: {
 		xBase: 871,
 		yBase: 311,
@@ -368,7 +372,7 @@ _*****____***************************************____*****_
 
 	},
 
-	init: function() {
+	init: function() { //This is the first function fam. It starts everything.
 		var _this = this;
 		_this.art.push(_this.banner);
 		_this.art.push(_this.daft_punk_robot);
@@ -385,13 +389,13 @@ _*****____***************************************____*****_
 		_this.setWrongTileCount();
 		_this.setupVersionBadge();
 
-		r.placeModule("test", function(e) {
+		r.placeModule("test", function(e) { //Not sure what this does yet. Probably most of everything.
 			_this.api = e("api");
 			_this.canvasse = e("canvasse");
 			_this.client = e("client");
 			_this.timer = e("timer");
 
-			_this.canvasse.drawBufferToDisplay =  function() {
+			_this.canvasse.drawBufferToDisplay =  function() { //Also not sure. Will clarify with self soon.
 	            var e = new ImageData(_this.canvasse.readBuffer, _this.canvasse.width, _this.canvasse.height);
 	            _this.canvasse.ctx.putImageData(e, 0, 0);
 
@@ -472,4 +476,6 @@ function get_color_name(color_number) {
 	}
 }
 
-placeGreen.init();
+//Everything is defined now. Hooray!
+
+placeGreen.init(); //Run one of those suckers. It's a great idea.
