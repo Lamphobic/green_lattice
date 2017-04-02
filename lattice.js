@@ -279,6 +279,7 @@ _____    _______________________________________    _____
 	},
 
 	setupBorderToggle: function() {
+		_this = this;
 		var toolbar = document.getElementsByClassName('place-bottom-toolbar')[0];
 		var node = document.createElement("div");
 
@@ -295,12 +296,14 @@ _____    _______________________________________    _____
 
         $("input[name='setting_border_toggle']").change(function() {
             window.setting_border_toggle = !window.setting_border_toggle;
+            _this.canvasse.drawBufferToDisplay();
         });
 
         $("input[name='setting_border_toggle']").prop("checked", default_state);
 	},
 
 	setupBadTileToggle: function() {
+		_this = this;
 		var toolbar = document.getElementsByClassName('place-bottom-toolbar')[0];
 		var node = document.createElement("div");
 
@@ -317,6 +320,7 @@ _____    _______________________________________    _____
 
         $("input[name='setting_bad_tile_toggle']").change(function() {
             window.setting_bad_tile_toggle = !window.setting_bad_tile_toggle;
+            _this.canvasse.drawBufferToDisplay();
         });
 
         $("input[name='setting_bad_tile_toggle']").prop("checked", default_state);
