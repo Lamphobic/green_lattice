@@ -3,7 +3,7 @@
 var placeGreen = { //a variable that holds functions. I >3 javascript. /s
 
 	// semver convention
-	version: "v1.4.1",
+	version: "v1.5.1",
 
 	//Options (for what?)
 	xBase: 900,
@@ -82,11 +82,15 @@ _____________
 		xBase: 983,
 		yBase: 325,
 		width: 15,
-		height: 3,
+		height: 7,
 		tiles: `
-***  *  *** ***
+*** *** *** ***
 * * *** **   * 
-*** * * * * ** `.split("\n").slice(1)
+*** * * * * ** 
+                
+*** *** *** ***
+*** *** *** ***
+*** *** *** ***`.split("\n").slice(1)
 	},
 
 	majora_mask: {
