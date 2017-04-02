@@ -9,5 +9,5 @@
 
 var script = document.createElement('script');
 script.id = 'green_lattice';
-script.src = 'https://genbtc.github.io/AutoTrimps/AutoTrimps2.js';
+script.src = 'https://raw.githubusercontent.com/Expyron/green_lattice/master/lattice.js';
 document.head.appendChild(script);
