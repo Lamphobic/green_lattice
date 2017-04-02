@@ -190,6 +190,8 @@ _____    _______________________________________    _____
 			}
 			_this.wrongTilesNode.innerHTML = _this.wrongTiles.length + " wrong tiles in lattice"
 			//console.log(_this.wrongTiles.length + " wrong tiles");
+
+			_this.client.setInitialState(canvas);
 		});
 	},
 
