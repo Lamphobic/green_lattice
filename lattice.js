@@ -1,7 +1,7 @@
 var placeGreen = {
 
 	// semver convention
-	version: "v1.4.0",
+	version: "v1.4.1",
 
 	//Options
 	xBase: 900,
