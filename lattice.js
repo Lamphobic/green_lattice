@@ -176,7 +176,6 @@ _____________
 	setLastColorPixel: function() {
 		var toolbar = document.getElementsByClassName('place-bottom-toolbar')[0];
 		var node = document.createElement("div");
-		this.wrongTilesNode = node;
 
 		node.classList.add("last-color-pixel");
 
