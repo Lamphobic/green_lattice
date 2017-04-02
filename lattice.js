@@ -177,9 +177,9 @@ _____________
 		var toolbar = document.getElementsByClassName('place-bottom-toolbar')[0];
 		var node = document.createElement("div");
 
-		node.classList.add("last-color-pixel");
+		node.classList.add("place-activity-count");
 
-		node.style.transform = "translate(-10px,-50px)";
+		node.style.transform = "translate(-10px,-75px)";
 
 		var x = 42;
 		var y = 42;
