@@ -173,6 +173,23 @@ _____________
         }
 	},
 
+	setLastColorPixel: function() {
+		var toolbar = document.getElementsByClassName('place-bottom-toolbar')[0];
+		var node = document.createElement("div");
+		this.wrongTilesNode = node;
+
+		node.classList.add("last-color-pixel");
+
+		node.style.transform = "translate(-10px,-50px)";
+
+		var x = 42;
+		var y = 42;
+		var targetColor = 5;
+		node.innerHTML = "Drawing at (" + x + "," + y + "): " + get_color_name(targetColor);
+
+		toolbar.appendChild(node);
+	},
+
 	setWrongTileCount: function() {
 		var toolbar = document.getElementsByClassName('place-bottom-toolbar')[0];
 		var node = document.createElement("div");
@@ -194,6 +211,7 @@ _____________
 		_this.art.push(_this.majora_mask);
 		_this.wrongTiles = [];
 		_this.setWrongTileCount();
+		_this.setLastColorPixel();
 		r.placeModule("test", function(e) {
 			_this.api = e("api");
 			_this.canvasse = e("canvasse");
