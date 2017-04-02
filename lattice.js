@@ -1,0 +1,148 @@
+var placeGreen = {
+	//Options
+	xBase: 900,
+	yBase: 250,
+	width: 100,
+	height: 50,
+
+	art: [],
+
+	//Banner
+	banner: {
+		xBase: 909,
+		yBase: 281,
+		width: 81,
+		height: 5,
+		tiles: `
+00000     303 00000 00000 00000 00000 003 0 0     _000_ 00000 00000 0 00000 00000
+0   0     0   0     0   0 0     0     0 0 0 0     0   0   0     0   0 0     0    
+00000   303   0 000 00000 000_  000_  0 0 0 0     00000   0     0   0 0     000_ 
+0 0     0     0   0 0 0   0     0     0 0 0 0     0   0   0     0   0 0     0    
+0 300 303     00000 0 300 00000 00000 0 300 00000 0   0   0     0   0 00000 00000`.split("\n").slice(1)
+	},
+	getBackgroundLatticeColor: function (x,y) {
+		if (x % 2 == 1 && y % 2 == 1) {
+			if ((x+y) % 4 == 0) {
+				return "A";
+			} else {
+				return "9";
+			}
+		} else {
+			return "3";
+		}
+	},
+
+	getTargetColor: function (x, y) {
+		var _this = this;
+		if (x >= _this.xBase && x < _this.xBase + _this.width && y >= _this.yBase && y < _this.yBase + _this.height ) {
+			for (artPiece in _this.art) {
+				var piece = _this.art[artPiece];
+				if (x >= piece.xBase && x < piece.xBase + piece.width && y >= piece.yBase && y < piece.yBase + piece.height ) {
+					var artColor = piece.tiles[y - piece.yBase][x - piece.xBase];
+					if (artColor === " ") {
+						return _this.getBackgroundLatticeColor(x,y);
+					} else {
+						return artColor;
+					}
+				}
+			}
+			return _this.getBackgroundLatticeColor(x,y)
+		} else {
+			return "_";
+		}
+	},
+
+	getWrongTiles: function () {
+		var _this = this;
+		this.api.getCanvasBitmapState().then(function(e,i) {
+			var canvas = i;
+
+			_this.wrongTiles.length = 0;
+
+			for (var x = _this.xBase;x < _this.xBase + _this.width; x++) {
+				for (var y = _this.yBase; y < _this.yBase + _this.height; y++) {
+					var _targetColor = _this.getTargetColor(x, y);
+					var targetColor = parseInt(_targetColor, 16);
+					var tileColor = canvas[x + y * r.config.place_canvas_width];
+					if(targetColor !== tileColor && _targetColor !== "_") {
+						_this.wrongTiles.push([x,y,targetColor, tileColor]);
+					}
+				}
+			}
+			console.log(_this.wrongTiles.length + " wrong tiles");
+		});
+	},
+
+	drawOne: function () {
+		var _this = this;
+		this.api.getTimeToWait().then(function(timer) {
+			if (timer < 1) {
+				if (_this.wrongTiles.length > 0) {
+					var tile = _this.wrongTiles[Math.floor(Math.random()*_this.wrongTiles.length)];
+					var x = tile[0];
+					var y = tile[1];
+					var targetColor = tile[2];
+					var tileColor = tile[3];
+					_this.api.getPixelInfo(x,y).then(function(bTile){
+						if (bTile.color == tileColor) {
+							console.log("Drawing at (" + x + "," + y + "): " + targetColor);
+							_this.api.draw(x,y,targetColor);
+						} else {
+							console.log("Redrawing");
+						}
+					});
+				}
+			} else {
+				//console.log("Waiting: " + Math.floor(timer / 1000));
+			}
+		})
+	},
+
+
+	init: function() {
+		var _this = this;
+		_this.art.push(_this.banner);
+		_this.wrongTiles = [];
+		r.placeModule("test", function(e) {
+			_this.api = e("api");
+			_this.canvasse = e("canvasse");
+			_this.client = e("client");
+
+			_this.canvasse.drawBufferToDisplay =  function() {
+	            var e = new ImageData(_this.canvasse.readBuffer, _this.canvasse.width, _this.canvasse.height);
+	            _this.canvasse.ctx.putImageData(e, 0, 0);
+
+	            _this.canvasse.ctx.fillStyle = 'purple';
+
+	            for (var x = _this.xBase;x < _this.xBase + _this.width; x++) {
+	            	_this.canvasse.ctx.fillRect(x, _this.yBase, 1, 1);
+	            	_this.canvasse.ctx.fillRect(x, _this.yBase + _this.height, 1, 1);
+	            }
+
+	            for (var y = _this.yBase;y < _this.yBase + _this.height; y++) {
+	            	_this.canvasse.ctx.fillRect(_this.xBase, y, 1, 1);
+	            	_this.canvasse.ctx.fillRect(_this.xBase + _this.width, y, 1, 1);
+	            }
+
+	            for (var i = 0;i < _this.wrongTiles.length; i++) {
+	            	var tile = _this.wrongTiles[i];
+
+					//this.canvasse.ctx.fillStyle = this.client.getPaletteColor(tile[3]);
+					_this.canvasse.ctx.fillStyle = 'red';
+
+					_this.canvasse.ctx.fillRect(tile[0], tile[1], 1, 1);
+	            }
+
+
+	            _this.canvasse.isBufferDirty = !1;
+	        }
+		});
+
+		window.setInterval(function(){_this.drawOne()}, 3 * 1000);
+		window.setInterval(function(){_this.getWrongTiles()}, 10 * 1000);
+		_this.getWrongTiles();
+	}
+
+}
+
+placeGreen.init();
