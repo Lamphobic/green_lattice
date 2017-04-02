@@ -11,6 +11,43 @@ var placeGreen = { //a variable that holds functions. I >3 javascript. /s
 	width: 100,
 	height: 100,
 
+	get_color_name: function (color_number) { //0 is white. 3 is black.
+		switch(color_number) {
+			case 0:
+				return 'white';
+			case 1:
+				return 'lightGrey';
+			case 2:
+				return 'grey';
+			case 3:
+				return 'black';
+			case 4:
+				return 'pink';
+			case 5:
+				return 'red';
+			case 6:
+				return 'orange';
+			case 7:
+				return 'brown';
+			case 8:
+				return 'yellow';
+			case 9:
+				return 'lightGreen';
+			case 10:
+				return 'green';
+			case 11:
+				return 'cyan';
+			case 12:
+				return 'teal';
+			case 13:
+				return 'blue';
+			case 14:
+				return 'fuchsia';
+			case 15:
+				return 'purple';
+		}
+	},
+	
 	art: [], //art pieces will be placed here later.
 
 	//art starts here
@@ -18,7 +55,7 @@ var placeGreen = { //a variable that holds functions. I >3 javascript. /s
 	Special Characters:
 		_:Wildcard. Do not paint over this square.
 		*:Same as _.
-	Colors: (See bottom of page)	
+	Colors: See above.
 	
 	*/
 	
@@ -291,110 +328,6 @@ _*****____***************************************____*****_
         }
 	},
 
-	setupLastColorPixel: function() {
-		var toolbar = document.getElementsByClassName('place-bottom-toolbar')[0];
-		var node = document.createElement("div");
-
-		node.classList.add("place-activity-count");
-		node.id = 'last-color-pixel';
-
-		node.style.transform = "translate(-10px,-100px)";
-
-		var x = 42;
-		var y = 42;
-		var targetColor = 5;
-		node.innerHTML = "Last tile drawn: NONE";
-
-		toolbar.appendChild(node);
-	},
-
-	setLastColorPixel: function(x, y, targetColor) {
-
-		var node = document.getElementById("last-color-pixel");
-
-		node.innerHTML = "Last tile drawn: " + get_color_name(targetColor) + " at (" + x + "," + y + ")";
-
-	},
-
-	setupBorderToggle: function() {
-		_this = this;
-		var toolbar = document.getElementsByClassName('place-bottom-toolbar')[0];
-		var node = document.createElement("div");
-
-		node.classList.add("place-activity-count");
-
-		node.style.transform = "translate(-10px,-125px)";
-
-		node.innerHTML = "<label><input type='checkbox' name='setting_border_toggle' id='setting_border_toggle' /> Show border</label>";
-
-		toolbar.appendChild(node);
-
-		var default_state = true;
-		_this.setting_border_toggle = default_state;
-
-		var button = document.getElementById("setting_border_toggle");
-		button.addEventListener("change", function() {
-            _this.setting_border_toggle = !_this.setting_border_toggle;
-            _this.canvasse.drawBufferToDisplay();
-        })
-
-        button.checked = default_state;
-	},
-
-	setupBadTileToggle: function() {
-		_this = this;
-		var toolbar = document.getElementsByClassName('place-bottom-toolbar')[0];
-		var node = document.createElement("div");
-
-		node.classList.add("place-activity-count");
-
-		node.style.transform = "translate(-10px,-150px)";
-
-		node.innerHTML = "<label><input type='checkbox' name='setting_bad_tile_toggle'  id='setting_bad_tile_toggle' /> Show Bad Tiles</label>";
-
-		toolbar.appendChild(node);
-
-        var default_state = true;
-		_this.setting_bad_tile_toggle = default_state;
-
-		var button = document.getElementById("setting_bad_tile_toggle");
-		button.addEventListener("change", function() {
-            _this.setting_bad_tile_toggle = !_this.setting_bad_tile_toggle;
-            _this.canvasse.drawBufferToDisplay();
-        })
-
-        button.checked = default_state;
-	},
-
-	setWrongTileCount: function() {
-		var toolbar = document.getElementsByClassName('place-bottom-toolbar')[0];
-		var node = document.createElement("div");
-
-		node.classList.add("place-activity-count");
-		node.id = 'wrongTilesNode';
-
-		node.style.transform = "translate(-10px,-75px)";
-
-		node.innerHTML = "0";
-
-		toolbar.appendChild(node);
-	},
-
-	setupVersionBadge: function() {
-		_this = this;
-		var toolbar = document.getElementsByClassName('place-bottom-toolbar')[0];
-		var node = document.createElement("div");
-
-		node.classList.add("place-activity-count");
-
-		node.style.transform = "translate(-10px,-50px)";
-
-		node.innerHTML = 'Version: ' + _this.version;
-
-		toolbar.appendChild(node);
-
-	},
-
 	init: function() { //This is the first function fam. It starts everything.
 		var _this = this;
 		_this.art.push(_this.banner);
@@ -459,45 +392,112 @@ _*****____***************************************____*****_
 		window.setTimeout(function(){_this.drawOne()}, 3 * 1000);
 		window.setInterval(function(){_this.getWrongTiles()}, 30 * 1000);
 		_this.getWrongTiles();
+	},
+
+	setupBadTileToggle: function() { //UI Element
+		_this = this;
+		var toolbar = document.getElementsByClassName('place-bottom-toolbar')[0];
+		var node = document.createElement("div");
+
+		node.classList.add("place-activity-count");
+
+		node.style.transform = "translate(-10px,-150px)";
+
+		node.innerHTML = "<label><input type='checkbox' name='setting_bad_tile_toggle'  id='setting_bad_tile_toggle' /> Show Bad Tiles</label>";
+
+		toolbar.appendChild(node);
+
+        var default_state = true;
+		_this.setting_bad_tile_toggle = default_state;
+
+		var button = document.getElementById("setting_bad_tile_toggle");
+		button.addEventListener("change", function() {
+            _this.setting_bad_tile_toggle = !_this.setting_bad_tile_toggle;
+            _this.canvasse.drawBufferToDisplay();
+        })
+
+        button.checked = default_state;
+	},
+
+	setupBorderToggle: function() { //UI Element
+		_this = this;
+		var toolbar = document.getElementsByClassName('place-bottom-toolbar')[0];
+		var node = document.createElement("div");
+
+		node.classList.add("place-activity-count");
+
+		node.style.transform = "translate(-10px,-125px)";
+
+		node.innerHTML = "<label><input type='checkbox' name='setting_border_toggle' id='setting_border_toggle' /> Show border</label>";
+
+		toolbar.appendChild(node);
+
+		var default_state = true;
+		_this.setting_border_toggle = default_state;
+
+		var button = document.getElementById("setting_border_toggle");
+		button.addEventListener("change", function() {
+            _this.setting_border_toggle = !_this.setting_border_toggle;
+            _this.canvasse.drawBufferToDisplay();
+        })
+
+        button.checked = default_state;
+	},
+
+	setupLastColorPixel: function() { //UI Element
+		var toolbar = document.getElementsByClassName('place-bottom-toolbar')[0];
+		var node = document.createElement("div");
+
+		node.classList.add("place-activity-count");
+		node.id = 'last-color-pixel';
+
+		node.style.transform = "translate(-10px,-100px)";
+
+		var x = 42;
+		var y = 42;
+		var targetColor = 5;
+		node.innerHTML = "Last tile drawn: NONE";
+
+		toolbar.appendChild(node);
+	},
+
+	setWrongTileCount: function() { //UI Element
+		var toolbar = document.getElementsByClassName('place-bottom-toolbar')[0];
+		var node = document.createElement("div");
+
+		node.classList.add("place-activity-count");
+		node.id = 'wrongTilesNode';
+
+		node.style.transform = "translate(-10px,-75px)";
+
+		node.innerHTML = "0";
+
+		toolbar.appendChild(node);
+	},
+	
+	setupVersionBadge: function() { //UI Element
+		_this = this;
+		var toolbar = document.getElementsByClassName('place-bottom-toolbar')[0];
+		var node = document.createElement("div");
+
+		node.classList.add("place-activity-count");
+
+		node.style.transform = "translate(-10px,-50px)";
+
+		node.innerHTML = 'Version: ' + _this.version;
+
+		toolbar.appendChild(node);
+
+	},
+
+	setLastColorPixel: function(x, y, targetColor) {
+		_this = this;		
+		var node = document.getElementById("last-color-pixel");
+
+		node.innerHTML = "Last tile drawn: " + _this.get_color_name(targetColor) + " at (" + x + "," + y + ")";
+
 	}
 
-}
-
-function get_color_name(color_number) {
-	switch(color_number) {
-		case 0:
-			return 'white';
-		case 1:
-			return 'lightGrey';
-		case 2:
-			return 'grey';
-		case 3:
-			return 'black';
-		case 4:
-			return 'pink';
-		case 5:
-			return 'red';
-		case 6:
-			return 'orange';
-		case 7:
-			return 'brown';
-		case 8:
-			return 'yellow';
-		case 9:
-			return 'lightGreen';
-		case 10:
-			return 'green';
-		case 11:
-			return 'cyan';
-		case 12:
-			return 'teal';
-		case 13:
-			return 'blue';
-		case 14:
-			return 'fuchsia';
-		case 15:
-			return 'purple';
-	}
 }
 
 //Everything is defined now. Hooray!
