@@ -151,7 +151,7 @@ _____________
 					});
 				}
 			} else {
-				window.setInterval(function(){_this.drawOne()}, timer + 5000);
+				window.setTimeout(function(){_this.drawOne()}, timer + 5000);
 				_this.timer.startTimer(timer + Date.now());
 				_this.timer.show();
 			}
