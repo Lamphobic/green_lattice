@@ -291,19 +291,20 @@ _*****____***************************************____*****_
 
 		node.style.transform = "translate(-10px,-125px)";
 
-		node.innerHTML = "<label><input type='checkbox' name='setting_border_toggle' /> Show border</label>";
+		node.innerHTML = "<label><input type='checkbox' name='setting_border_toggle' id='setting_border_toggle' /> Show border</label>";
 
 		toolbar.appendChild(node);
 
 		var default_state = true;
-		window.setting_border_toggle = default_state;
+		_this.setting_border_toggle = default_state;
 
-        $("input[name='setting_border_toggle']").change(function() {
-            window.setting_border_toggle = !window.setting_border_toggle;
+		var button = document.getElementById("setting_border_toggle");
+		button.addEventListener("change", function() {
+            _this.setting_border_toggle = !_this.setting_border_toggle;
             _this.canvasse.drawBufferToDisplay();
-        });
+        })
 
-        $("input[name='setting_border_toggle']").prop("checked", default_state);
+        button.checked = default_state;
 	},
 
 	setupBadTileToggle: function() {
@@ -315,19 +316,20 @@ _*****____***************************************____*****_
 
 		node.style.transform = "translate(-10px,-150px)";
 
-		node.innerHTML = "<label><input type='checkbox' name='setting_bad_tile_toggle' /> Show Bad Tiles</label>";
+		node.innerHTML = "<label><input type='checkbox' name='setting_bad_tile_toggle'  id='setting_bad_tile_toggle' /> Show Bad Tiles</label>";
 
 		toolbar.appendChild(node);
 
-		var default_state = true;
-		window.setting_bad_tile_toggle = default_state;
+        var default_state = true;
+		_this.setting_bad_tile_toggle = default_state;
 
-        $("input[name='setting_bad_tile_toggle']").change(function() {
-            window.setting_bad_tile_toggle = !window.setting_bad_tile_toggle;
+		var button = document.getElementById("setting_bad_tile_toggle");
+		button.addEventListener("change", function() {
+            _this.setting_bad_tile_toggle = !_this.setting_bad_tile_toggle;
             _this.canvasse.drawBufferToDisplay();
-        });
+        })
 
-        $("input[name='setting_bad_tile_toggle']").prop("checked", default_state);
+        button.checked = default_state;
 	},
 
 	setWrongTileCount: function() {
@@ -386,7 +388,7 @@ _*****____***************************************____*****_
 	            var e = new ImageData(_this.canvasse.readBuffer, _this.canvasse.width, _this.canvasse.height);
 	            _this.canvasse.ctx.putImageData(e, 0, 0);
 
-	            if(!!window.setting_border_toggle) {
+	            if(!!_this.setting_border_toggle) {
 
 		            for (artPiece in _this.art) {
 						var piece = _this.art[artPiece];
@@ -396,7 +398,7 @@ _*****____***************************************____*****_
 					_this.drawBorder(_this.xBase,_this.yBase,_this.width,_this.height,"purple");
 				}
 
-				if(!!window.setting_bad_tile_toggle) {
+				if(!!_this.setting_bad_tile_toggle) {
 
 		            for (var i = 0;i < _this.wrongTiles.length; i++) {
 		            	var tile = _this.wrongTiles[i];
