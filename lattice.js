@@ -142,6 +142,7 @@ _____________
 					var tileColor = tile[3];
 					_this.api.getPixelInfo(x,y).then(function(bTile){
 						if (bTile.color == tileColor) {
+							_this.setLastColorPixel(x, y, targetColor);
 							console.log("Drawing at (" + x + "," + y + "): " + get_color_name(targetColor));
 							_this.api.draw(x,y,targetColor);
 							window.setTimeout(function(){_this.drawOne()}, 5000);
@@ -173,20 +174,29 @@ _____________
         }
 	},
 
-	setLastColorPixel: function() {
+	setupLastColorPixel: function() {
 		var toolbar = document.getElementsByClassName('place-bottom-toolbar')[0];
 		var node = document.createElement("div");
 
 		node.classList.add("place-activity-count");
+		node.id = 'last-color-pixel';
 
 		node.style.transform = "translate(-10px,-75px)";
 
 		var x = 42;
 		var y = 42;
 		var targetColor = 5;
-		node.innerHTML = "Drawing at (" + x + "," + y + "): " + get_color_name(targetColor);
+		node.innerHTML = "Last tile drawn: NONE";
 
 		toolbar.appendChild(node);
+	},
+
+	setLastColorPixel: function(x, y, targetColor) {
+
+		var node = document.getElementById("last-color-pixel");
+
+		node.innerHTML = "Last tile drawn: " + get_color_name(targetColor) + " at (" + x + "," + y + ")";
+
 	},
 
 	setWrongTileCount: function() {
@@ -210,7 +220,7 @@ _____________
 		_this.art.push(_this.majora_mask);
 		_this.wrongTiles = [];
 		_this.setWrongTileCount();
-		_this.setLastColorPixel();
+		_this.setupLastColorPixel();
 		r.placeModule("test", function(e) {
 			_this.api = e("api");
 			_this.canvasse = e("canvasse");
