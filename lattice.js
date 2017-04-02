@@ -314,7 +314,6 @@ _____    _______________________________________    _____
 		window.setting_bad_tile_toggle = default_state;
 
         $("input[name='setting_bad_tile_toggle']").change(function() {
-        	console.log('toggle');
             window.setting_bad_tile_toggle = !window.setting_bad_tile_toggle;
         });
 
