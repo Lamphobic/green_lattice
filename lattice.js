@@ -1,9 +1,9 @@
 var placeGreen = {
 	//Options
 	xBase: 900,
-	yBase: 250,
+	yBase: 240,
 	width: 100,
-	height: 45,
+	height: 70,
 
 	art: [],
 
@@ -24,7 +24,7 @@ var placeGreen = {
 		xBase: 985,
 		yBase: 289,
 		width: 13,
-		height: 17,
+		height: 35,
 		tiles: `
   _________  
  ___________ 
@@ -42,8 +42,35 @@ _____________
   _________  
   _________  
    _______   
+   _______   
+
+  _________  
+ ___________ 
+ ___________ 
+ ___________ 
+ ___________ 
+ ___________ 
+ ___________ 
+ ___________ 
+ ___________ 
+ ___________ 
+  _________  
+  _________  
+  _________  
+  _________  
+  _________  
+   _______   
    _______   `.split("\n").slice(1)
 	},
+
+	majora_mask: {
+		xBase: 925,
+		yBase: 297,
+		width: 57,
+		height: 55,
+		tiles: Array(55).fill("_".repeat(57))
+	},
+
 	getBackgroundLatticeColor: function (x,y) {
 		if (x % 2 == 1 && y % 2 == 1) {
 			if ((x+y) % 4 == 0) {
@@ -99,7 +126,7 @@ _____________
 				}
 			}
 			_this.wrongTilesNode.innerHTML = _this.wrongTiles.length + " wrong tiles in lattice"
-			console.log(_this.wrongTiles.length + " wrong tiles");
+			//console.log(_this.wrongTiles.length + " wrong tiles");
 		});
 	},
 
@@ -123,7 +150,8 @@ _____________
 					});
 				}
 			} else {
-				//console.log("Waiting: " + Math.floor(timer / 1000));
+				window.setInterval(function(){_this.drawOne()}, timer + 5000);
+				console.log("Waiting: " + Math.floor(timer / 1000));
 			}
 		})
 	},
@@ -161,6 +189,7 @@ _____________
 		var _this = this;
 		_this.art.push(_this.banner);
 		_this.art.push(_this.daft_punk_robot);
+		_this.art.push(_this.majora_mask);
 		_this.wrongTiles = [];
 		_this.setWrongTileCount();
 		r.placeModule("test", function(e) {
@@ -193,7 +222,7 @@ _____________
 	        }
 		});
 
-		window.setInterval(function(){_this.drawOne()}, 3 * 1000);
+		window.setTimeout(function(){_this.drawOne()}, 3 * 1000);
 		window.setInterval(function(){_this.getWrongTiles()}, 10 * 1000);
 		_this.getWrongTiles();
 	}
