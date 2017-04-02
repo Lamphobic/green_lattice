@@ -3,7 +3,7 @@
 // @namespace    https://github.com/expyron/GreenLattice
 // @version      0.1
 // @author       Expyron
-// @include        https://www.reddit.com/place
+// @include      https://www.reddit.com/place*
 // @grant        none
 // ==/UserScript==
 
