@@ -143,11 +143,11 @@ _____________
 					_this.api.getPixelInfo(x,y).then(function(bTile){
 						if (bTile.color == tileColor) {
 							_this.setLastColorPixel(x, y, targetColor);
-							console.log("Drawing at (" + x + "," + y + "): " + get_color_name(targetColor));
+							//console.log("Drawing at (" + x + "," + y + "): " + get_color_name(targetColor));
 							_this.api.draw(x,y,targetColor);
 							window.setTimeout(function(){_this.drawOne()}, 5000);
 						} else {
-							console.log("Redrawing");
+							//console.log("Redrawing");
 						}
 					});
 				}
@@ -229,7 +229,6 @@ _____________
 		window.setting_border_toggle = default_state;
 
         $("input[name='setting_border_toggle']").change(function() {
-        	console.log('toggle');
             window.setting_border_toggle = !window.setting_border_toggle;
         });
 
