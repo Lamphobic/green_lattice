@@ -25,7 +25,24 @@ var placeGreen = {
 		yBase: 289,
 		width: 13,
 		height: 17,
-		tiles: ""
+		tiles: `
+  _________  
+ ___________ 
+ ___________ 
+_____________
+_____________
+_____________
+_____________
+_____________
+ ___________ 
+ ___________ 
+  _________  
+  _________  
+  _________  
+  _________  
+  _________  
+   _______   
+   _______   `.split("\n").slice(1)
 	},
 	getBackgroundLatticeColor: function (x,y) {
 		if (x % 2 == 1 && y % 2 == 1) {
@@ -139,14 +156,13 @@ var placeGreen = {
 	            var e = new ImageData(_this.canvasse.readBuffer, _this.canvasse.width, _this.canvasse.height);
 	            _this.canvasse.ctx.putImageData(e, 0, 0);
 
-	            _this.drawBorder(_this.xBase,_this.yBase,_this.width,_this.height,"purple");
-
 	            for (artPiece in _this.art) {
 					var piece = _this.art[artPiece];
 					_this.drawBorder(piece.xBase,piece.yBase,piece.width,piece.height,"blue");
 				}
-	            
 
+				_this.drawBorder(_this.xBase,_this.yBase,_this.width,_this.height,"purple");
+	            
 	            for (var i = 0;i < _this.wrongTiles.length; i++) {
 	            	var tile = _this.wrongTiles[i];
 
