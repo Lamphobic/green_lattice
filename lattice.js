@@ -1,7 +1,7 @@
 var placeGreen = {
 
 	// semver convention
-	version: "v1.0.0",
+	version: "v1.1.0",
 
 	//Options
 	xBase: 900,
@@ -179,6 +179,15 @@ _*****____***************************************____*****_
 
 	getWrongTiles: function () {
 		var _this = this;
+
+		_this.is_fetching = !!_this.is_fetching;
+
+		if(_this.is_fetching) {
+			return;
+		}
+
+		_this.is_fetching = true;
+
 		this.api.getCanvasBitmapState().then(function(e,i) {
 			var canvas = i;
 
@@ -199,6 +208,8 @@ _*****____***************************************____*****_
 			//console.log(_this.wrongTiles.length + " wrong tiles");
 
 			_this.client.setInitialState(canvas);
+
+			_this.is_fetching = false;
 		});
 	},
 
