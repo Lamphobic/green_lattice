@@ -131,7 +131,7 @@ _____    _______________________________________    _____
 		yBase: 311,
 		width: 55,
 		height: 40,
-		tiles: Array(40).fill("_".repeat(50))
+		tiles: Array(40).fill("_".repeat(55))
 	},
 
 	getBackgroundLatticeColor: function (x,y) {
