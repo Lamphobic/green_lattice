@@ -21,9 +21,9 @@ var placeGreen = {
 0 300 303     00000 0 300 00000 00000 0 300 00000 0   0   0     0   0 00000 00000`.split("\n").slice(1)
 	},
 	daft_punk_robot: {
-		xBase: 986,
+		xBase: 985,
 		yBase: 289,
-		width: 11,
+		width: 13,
 		height: 17,
 		tiles: ""
 	},
@@ -143,7 +143,7 @@ var placeGreen = {
 
 	            for (artPiece in _this.art) {
 					var piece = _this.art[artPiece];
-					_this.drawBorder(piece.xBase,piece.yBase,piece.width,piece.height,"purple");
+					_this.drawBorder(piece.xBase,piece.yBase,piece.width,piece.height,"blue");
 				}
 	            
 
