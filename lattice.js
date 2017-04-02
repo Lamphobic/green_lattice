@@ -14,6 +14,14 @@ var placeGreen = { //a variable that holds functions. I >3 javascript. /s
 	art: [], //art pieces will be placed here later.
 
 	//art starts here
+	/*
+	Special Characters:
+		_:Wildcard. Do not paint over this square.
+		*:Same as _.
+	Colors: (See bottom of page)	
+	
+	*/
+	
 	//Banner
 	banner: {
 		xBase: 909,
@@ -69,6 +77,17 @@ _____________
    _______   
    _______   `.split("\n").slice(1)
 	},
+	
+	daft_logo: {
+		xBase: 983,
+		yBase: 325,
+		width: 15,
+		height: 3,
+		tiles: '
+***  *  *** ***
+* * *** **   * 
+*** * * * * ** '
+	}
 
 	majora_mask: {
 		xBase: 924,
@@ -134,15 +153,15 @@ _*****____***************************************____*****_
                 _**_                    _**_               
                  __                      __                `.split("\n").slice(1)
 	},
-	//art ends here
+	//art ends here/
 	
-	bottom_left: {
+	bottom_left: { //the shields?
 		xBase: 871,
 		yBase: 311,
 		width: 65,
 		height: 40,
 		tiles: Array(40).fill("_".repeat(65))
-	},
+	}, //Probably art.
 
 	getBackgroundLatticeColor: function (x,y) {
 		if (x % 2 == 1 && y % 2 == 1) {
@@ -378,6 +397,7 @@ _*****____***************************************____*****_
 		_this.art.push(_this.daft_punk_robot);
 		_this.art.push(_this.bottom_left);
 		_this.art.push(_this.majora_mask);
+		_this.art.push(_this.daft_logo);
 
 		_this.wrongTiles = [];
 
