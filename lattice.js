@@ -129,7 +129,7 @@ _____    _______________________________________    _____
 	bottom_left: {
 		xBase: 871,
 		yBase: 311,
-		width: 50,
+		width: 55,
 		height: 40,
 		tiles: Array(40).fill("_".repeat(50))
 	},
