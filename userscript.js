@@ -7,7 +7,12 @@
 // @grant        none
 // ==/UserScript==
 
-var script = document.createElement('script');
-script.id = 'green_lattice';
-script.src = 'https://raw.githubusercontent.com/Expyron/green_lattice/master/lattice.js';
-document.head.appendChild(script);
+
+
+window.setTimeout(function(){
+  console.log("Loading Green Lattice");
+  var script = document.createElement('script');
+  script.id = 'green_lattice';
+  script.src = 'https://expyron.github.io/green_lattice/lattice.js';
+  document.head.appendChild(script);
+}, 2 * 1000);
