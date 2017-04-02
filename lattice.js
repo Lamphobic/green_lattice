@@ -144,7 +144,7 @@ _____________
 						if (bTile.color == tileColor) {
 							console.log("Drawing at (" + x + "," + y + "): " + get_color_name(targetColor));
 							_this.api.draw(x,y,targetColor);
-							window.setInterval(function(){_this.drawOne()}, 5000);
+							window.setTimeout(function(){_this.drawOne()}, 5000);
 						} else {
 							console.log("Redrawing");
 						}
