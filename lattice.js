@@ -7,9 +7,9 @@ var placeGreen = { //a variable that holds functions. I >3 javascript. /s
 
 	//Options (for what?)
 	xBase: 900,
-	yBase: 230,
+	yBase: 232,
 	width: 100,
-	height: 100,
+	height: 98,
 
 	get_color_name: function (color_number) { //0 is white. 3 is black.
 		switch(color_number) {
@@ -128,6 +128,23 @@ _____________
 *** *** *** ***
 *** *** *** ***
 *** *** *** ***`.split("\n").slice(1)
+	},
+	
+	skyrim_logo: {
+		xBase: 895,
+		yBase: 237,
+		width: 36,
+		height: 9,
+		tiles: `
+777777777777777777777777777777777777
+777777777777777777777777777777777777
+7770777707*****0***********0******77
+7770070707*00**0*0*0*0*0*0***00*0*77
+770700707700***00**0*0*00**0*0*0*077
+7707077077**0**0*0**00*0***0*0*0*077
+707707077700***0*0***0*0***0*0***077
+7077770777**********0*************77
+777777777777777777777777777777777777`.split("\n").slice(1)
 	},
 
 	majora_mask: {
@@ -334,6 +351,7 @@ _*****____***************************************____*****_
 		_this.art.push(_this.daft_punk_robot);
 		_this.art.push(_this.bottom_left);
 		_this.art.push(_this.majora_mask);
+		_this.art.push(_this.skyrim_logo);
 		_this.art.push(_this.daft_logo);
 
 		_this.wrongTiles = [];
