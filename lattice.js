@@ -235,7 +235,6 @@ ___________________________________________________________
 
 	getTargetColor: function (x, y) {
 		var _this = this;
-		var 
 		if (x >= _this.xBase && x < _this.xBase + _this.width && y >= _this.yBase && y < _this.yBase + _this.height ) { //Should never fail. Period.
 			for (artPiece in _this.art) {
 				var piece = _this.art[artPiece];
