@@ -362,7 +362,7 @@ ___________________________________________________________
 		_this.art.push(_this.daft_punk_robot);
 		_this.art.push(_this.bottom_left);
 		_this.art.push(_this.majora_mask);
-		_this.art.push(_this.skyrim_logo);
+		//_this.art.push(_this.skyrim_logo);
 		_this.art.push(_this.daft_logo);
 
 		_this.wrongTiles = [];
