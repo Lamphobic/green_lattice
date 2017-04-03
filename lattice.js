@@ -3,13 +3,13 @@
 var placeGreen = { //a variable that holds functions. I >3 javascript. /s
 
 	// semver convention
-	version: "v1.5.2",
+	version: "v1.5.3",
 
 	//Options (for what?)
 	xBase: 900,
-	yBase: 230,
+	yBase: 232,
 	width: 100,
-	height: 100,
+	height: 98,
 
 	get_color_name: function (color_number) { //0 is white. 3 is black.
 		switch(color_number) {
@@ -128,6 +128,23 @@ _____________
 *** *** *** ***
 *** *** *** ***
 *** *** *** ***`.split("\n").slice(1)
+	},
+	
+	skyrim_logo: {
+		xBase: 895,
+		yBase: 237,
+		width: 36,
+		height: 9,
+		tiles: `
+777777777777777777777777777777777777
+777777777777777777777777777777777777
+777077770777777077777777777077777777
+777007070770077070707070707770070777
+770700707700777007707070077070707077
+770707707777077070770070777070707077
+707707077700777070777070777070777077
+707777077777777777770777777777777777
+777777777777777777777777777777777777`.split("\n").slice(1)
 	},
 
 	majora_mask: {
@@ -343,6 +360,7 @@ _*****____***************************************____*****_
 		_this.art.push(_this.daft_punk_robot);
 		_this.art.push(_this.bottom_left);
 		_this.art.push(_this.majora_mask);
+		_this.art.push(_this.skyrim_logo);
 		_this.art.push(_this.daft_logo);
 
 		_this.wrongTiles = [];
