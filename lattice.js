@@ -33,17 +33,17 @@ var placeGreen = { //a variable that holds functions. I >3 javascript. /s
 				return 'yellow';
 			case 9:
 				return 'lightGreen';
-			case 10:
+			case 10: //A
 				return 'green';
-			case 11:
+			case 11: //B
 				return 'cyan';
-			case 12:
+			case 12: //C
 				return 'teal';
-			case 13:
+			case 13: //D
 				return 'blue';
-			case 14:
+			case 14: //E
 				return 'fuchsia';
-			case 15:
+			case 15: //F
 				return 'purple';
 		}
 	},
@@ -54,7 +54,8 @@ var placeGreen = { //a variable that holds functions. I >3 javascript. /s
 	/*
 	Special Characters:
 		_:Do not paint over this square.
-		*:Wildcard used in a peice when there may be possible overlap with another peice. Allows other art to write over that pixel.
+		 :Is lattice. That is a space. 
+		*:Wildcard used in a peice when there may be possible overlap with another peice. Allows other art to write over that pixel. If there is no other art it defaults to lattice.
 	Colors: See above.
 
 	*/
