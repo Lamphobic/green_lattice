@@ -17,5 +17,7 @@ Green Lattice
 
 2. Click: https://expyron.github.io/green_lattice/lattice.user.js
 
+3. Go to: https://www.reddit.com/place?webview=true
+
 **NOTE:** If you get a bunch of code instead of it installing, you can copy and paste the code as a new script in greasemonkey/tampermonkey.
 
