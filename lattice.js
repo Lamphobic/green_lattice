@@ -47,7 +47,7 @@ var placeGreen = { //a variable that holds functions. I >3 javascript. /s
 				return 'purple';
 		}
 	},
-	
+
 	art: [], //art pieces will be placed here later.
 
 	//art starts here
@@ -56,9 +56,9 @@ var placeGreen = { //a variable that holds functions. I >3 javascript. /s
 		_:Wildcard. Do not paint over this square.
 		*:Same as _.
 	Colors: See above.
-	
+
 	*/
-	
+
 	//Banner
 	banner: {
 		xBase: 909,
@@ -301,6 +301,15 @@ _*****____***************************************____*****_
 
 		this.api.getTimeToWait().then(function(timer) {
 			if (timer < 1) {
+
+				if(!_this.setting_should_draw_toggle) {
+					console.log('cannot draw')
+					window.setTimeout(function(){_this.drawOne()}, 1000);
+					return;
+				}
+
+				console.log('now i can draw')
+
 				if (_this.wrongTiles.length > 0) {
 					var tile = _this.wrongTiles[Math.floor(Math.random()*_this.wrongTiles.length)];
 					var x = tile[0];
@@ -358,6 +367,7 @@ _*****____***************************************____*****_
 
 		// set up info widgets
 
+		_this.setupShouldDrawToggle();
 		_this.setupBadTileToggle();
 		_this.setupBorderToggle();
 		_this.setupLastColorPixel();
@@ -410,6 +420,30 @@ _*****____***************************************____*****_
 		window.setTimeout(function(){_this.drawOne()}, 3 * 1000);
 		window.setInterval(function(){_this.getWrongTiles()}, 30 * 1000);
 		_this.getWrongTiles();
+	},
+
+	setupShouldDrawToggle: function() { //UI Element
+		_this = this;
+		var toolbar = document.getElementsByClassName('place-bottom-toolbar')[0];
+		var node = document.createElement("div");
+
+		node.classList.add("place-activity-count");
+
+		node.style.transform = "translate(-10px,-175px)";
+
+		node.innerHTML = "<label><input type='checkbox' name='setting_should_draw_toggle'  id='setting_should_draw_toggle' /> Should Draw</label>";
+
+		toolbar.appendChild(node);
+
+        var default_state = true;
+		_this.setting_should_draw_toggle = default_state;
+
+		var button = document.getElementById("setting_should_draw_toggle");
+		button.addEventListener("change", function() {
+            _this.setting_should_draw_toggle = !_this.setting_should_draw_toggle;
+        })
+
+        button.checked = default_state;
 	},
 
 	setupBadTileToggle: function() { //UI Element
@@ -492,7 +526,7 @@ _*****____***************************************____*****_
 
 		toolbar.appendChild(node);
 	},
-	
+
 	setupVersionBadge: function() { //UI Element
 		_this = this;
 		var toolbar = document.getElementsByClassName('place-bottom-toolbar')[0];
@@ -509,7 +543,7 @@ _*****____***************************************____*****_
 	},
 
 	setLastColorPixel: function(x, y, targetColor) {
-		_this = this;		
+		_this = this;
 		var node = document.getElementById("last-color-pixel");
 
 		node.innerHTML = "Last tile drawn: " + _this.get_color_name(targetColor) + " at (" + x + "," + y + ")";
