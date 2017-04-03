@@ -200,7 +200,7 @@ _________`.split("\n").slice(1)
 	
 	owo: {
 		xBase: 921,
-		yBase: 213,
+		yBase: 215,
 		width: 19,
 		height: 7,
 		tiles: `
