@@ -7,9 +7,9 @@ var placeGreen = { //a variable that holds functions. I >3 javascript. /s
 
 	//Options (for what?)
 	xBase: 900,
-	yBase: 232,
+	yBase: 215,
 	width: 100,
-	height: 98,
+	height: 115,
 
 	get_color_name: function (color_number) { //0 is white. 3 is black.
 		switch(color_number) {
@@ -158,10 +158,12 @@ _______________`.split("\n").slice(1)
 	
 	slime: {
 		xBase: 894,
-		yBase: 218,
+		yBase: 216,
 		width: 26,
-		height: 14,
+		height: 16,
 		tiles: `
+__________________________
+__________________________
 __________________________
 __________________________
 __________________________
