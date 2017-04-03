@@ -3,7 +3,7 @@
 var placeGreen = { //a variable that holds functions. I >3 javascript. /s
 
 	// semver convention
-	version: "v1.6.9",
+	version: "v1.7",
 
 	//Options (for what?)
 	xBase: 900,
@@ -130,7 +130,15 @@ _______________
 _______________
 _______________`.split("\n").slice(1)
 	},
-	
+
+    skyrim_logo_alt: {
+        xBase: 895,
+        yBase: 237,
+        width: 36,
+        height: 9,
+        tiles: Array(9).fill("_".repeat(36))
+    },
+
 	skyrim_logo: {
 		xBase: 895,
 		yBase: 237,
@@ -377,9 +385,14 @@ ___________________________________________________________
 	drawOne: function () {
 		var _this = this;
 
-		_this.getWrongTiles();
-
 		this.api.getTimeToWait().then(function(timer) {
+
+            if(isNaN(timer)) {
+                return;
+            }
+
+            _this.getWrongTiles();
+
 			if (timer < 1) {
 
 				if(!_this.setting_should_draw_toggle) { //if should draw is on then script draws for you.
@@ -441,6 +454,7 @@ ___________________________________________________________
 		_this.art.push(_this.bottom_left);
 		_this.art.push(_this.majora_mask);
 		//_this.art.push(_this.skyrim_logo);
+        _this.art.push(_this.skyrim_logo_alt);
 		_this.art.push(_this.slime);
 		_this.art.push(_this.tlfower);
 		_this.art.push(_this.owo);
