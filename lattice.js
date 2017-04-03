@@ -129,7 +129,15 @@ _______________
 _______________
 _______________`.split("\n").slice(1)
 	},
-	
+
+    skyrim_logo_alt: {
+        xBase: 895,
+        yBase: 237,
+        width: 36,
+        height: 9,
+        tiles: Array(9).fill("_".repeat(36))
+    },
+
 	skyrim_logo: {
 		xBase: 895,
 		yBase: 237,
@@ -445,6 +453,7 @@ ___________________________________________________________
 		_this.art.push(_this.bottom_left);
 		_this.art.push(_this.majora_mask);
 		//_this.art.push(_this.skyrim_logo);
+        _this.art.push(_this.skyrim_logo_alt);
 		_this.art.push(_this.slime);
 		_this.art.push(_this.tlfower);
 		_this.art.push(_this.owo);
